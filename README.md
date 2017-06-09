@@ -3,3 +3,6 @@ This is a test project which helped me to learn React, Redux, Express and JWT au
 
 ## Serverside
 The framework used in this branch is Koa 2 with async and await keywords for reducing the number of callbacks. The data is saved in a Mondo database using Mongoose ORM.
+
+## Starting the projects
+After installing all the packages, both projects (the client side and the server side) have to be started by running *npm run start* command.
