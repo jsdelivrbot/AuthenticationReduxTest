@@ -12,7 +12,6 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "config": "^1.26.1",
-    "cors": "^2.8.3",
     "jwt-simple": "^0.5.1",
     "koa": "^1.4.0",
     "koa-bodyparser": "^2.5.0",
