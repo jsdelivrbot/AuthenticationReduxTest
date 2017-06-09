@@ -1,4 +1,8 @@
-# AuthenticationReduxTest
+# AuthenticationReduxTest with Koa1
 This is a test project which helped me to learn React, Redux, Express and JWT authentication method
 
-An authentication test project written in React + Redux on the client side and express.js for server side. I did this project after watching a course with the goal of learning React. It’s a simple project where a user can sign up, sign in and it has one protected route. Everything is stored to a MongoDB database. The method used for authentication is JWT.
+#SERVERSIDE
+The server side is written with Koa 1 using generators and promises in order to avoid callbacks. The database is postgresSQL and the orm used for inserting and retrieving users is Sequelize
+
+#Running the serverside
+In order to be able to run it, first you have to create a new "user" database (or call it however you want), but you must change the URL connection string you can find in /confi/default.js file
