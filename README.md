@@ -1,7 +1,7 @@
 # AuthenticationReduxTest with Koa1
 This is a test project which helped me to learn React, Redux, Express and JWT authentication method
 
-#$ SERVERSIDE
+## Serverside
 The server side is written with Koa 1 using generators and promises in order to avoid callbacks. The database is postgresSQL and the orm used for inserting and retrieving users is Sequelize
 
 ## Running the serverside
