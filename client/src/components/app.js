@@ -6,7 +6,7 @@ export default class App extends Component {
         return (
             <div>
                 <Header/>
-                {/*trebuie sa arat componentele de sub aplicatie*/}
+                {/*render the other components*/}
                 {this.props.children}
             </div>
         );

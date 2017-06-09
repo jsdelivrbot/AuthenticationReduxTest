@@ -10,9 +10,12 @@ class Header extends Component {
     renderLinks() {
         if (this.props.authenticated) {
             //show link to sign out
-            return <li className="nav-item">
+            return [<li className="nav-item" key={1}>
                 <Link className="nav-link" to="/signout">Sign out</Link>
-            </li>
+            </li>,
+        <li className="nav-item" key={2}>
+                <Link className="nav-link" to="/users">Users list</Link>
+            </li>]
         }
         else {
             //show link to sign in or sign up

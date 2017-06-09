@@ -5,7 +5,8 @@ import {
     AUTH_USER,
     UNAUTH_USER,
     AUTH_ERROR,
-    FETCH_MESSAGE
+    FETCH_MESSAGE,
+    FETCH_USERS
 } from '../actions/types'
 
 export default function (state = {}, action) {
@@ -19,6 +20,8 @@ export default function (state = {}, action) {
             return {...state, error: action.payload};
         case FETCH_MESSAGE:
             return {...state, message: action.payload};
+        case FETCH_USERS:
+            return {...state, allUsers: action.payload};
     }
 
     return state;

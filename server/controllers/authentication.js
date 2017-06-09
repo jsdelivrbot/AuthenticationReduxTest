@@ -57,3 +57,13 @@ exports.signup = function (req, res, next) {
 
 
 }
+
+exports.getAllUsers = async function (req, res, next) {
+    let allUsers = await User.find();
+    if (!allUsers) {
+        res.json({success: true, result: null});
+    }
+    res.json({success: true, result: allUsers});
+
+}
+

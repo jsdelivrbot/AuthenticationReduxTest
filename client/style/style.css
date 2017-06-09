@@ -1,3 +1,7 @@
-.error{
-    color:Red;
+.error {
+    color: Red;
+}
+
+.list-group-item:nth-child(2n) {
+    background: #efefef;
 }
