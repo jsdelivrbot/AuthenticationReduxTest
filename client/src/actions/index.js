@@ -2,13 +2,13 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_MESSAGE, FETCH_USERS } from './types';
 
-const ROOT_URL = "http://localhost:3090";
+const ROOT_URL = "http://localhost:3000";
 
 export function signinUser({email, password}) {
     //folosesc redux-thunk ca sa intorc o functie
     return function (dispatch) {
         //Submit email/password to server
-        axios.post(`${ROOT_URL}/signin`, {email, password})
+        axios.post(`${ROOT_URL}/users/signin`, {email, password})
             .then(response => {
                 //If request is good:
                 //-update state to indicate user is authenticated
@@ -32,7 +32,7 @@ export function signupUser({email, password}) {
     //folosesc redux-thunk ca sa intorc o functie
     return function (dispatch) {
         //Submit email/password to server
-        axios.post(`${ROOT_URL}/signup`, {email, password})
+        axios.post(`${ROOT_URL}/users/signup`, {email, password})
             .then(response => {
                 //If request is good:
                 //-update state to indicate user is authenticated

@@ -1,16 +1,19 @@
 /**
- * Created by dragos on 14/01/2017.
+ * Created by dragos on 06/06/2017.
  */
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
+//validation rules
+const maxDescriptionRule = [100, 'Description must not exceed 100 characters!'];
 
-//Define the model
-const userSchema = new Schema({
+//Model definition
+const userSchema = mongoose.Schema({
     email: {type: String, unique: true, lowercase: true},
-    password: String
+    password: String,
+    name: String,
+    age: Number,
+    description: {type: String, maxlength: maxDescriptionRule}
 });
-
 
 //on save hook, encrypt the password
 userSchema.pre('save', function (next) {
@@ -33,18 +36,17 @@ userSchema.pre('save', function (next) {
 
 //Helper which checks if a received password is the same as the encrypted password
 userSchema.methods.comparePassword = function (candidatePassword, callback) {
-    bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+    //make sure I cast the received password to string. I had problems when the password was "1234", bcrypt.compare was throwing an error "Incorrect arguments"
+    bcrypt.compare(candidatePassword.toString(), this.password, function (err, isMatch) {
         if (err) {
             return callback(err);
         }
         callback(null, isMatch);
     })
-
 }
 
-//Create the model class
+
+//create the model class
 const ModelClass = mongoose.model('user', userSchema);
 
-
-//Export the model
 module.exports = ModelClass;

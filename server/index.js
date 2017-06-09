@@ -1,24 +1,54 @@
-//Main starting point of the server
-const express = require('express');
-const http = require('http');
-const bodyParser = require('body-parser'); //middleware which parses any request which comes
-const morgan = require('morgan'); //middleware for logging
+/**
+ * Created by dragos on 06/06/2017.
+ */
+
+'use strict';
+
+const Koa = require('koa');
+const logger = require('koa-logger');
+const bodyParser = require('koa-bodyparser');
+const config = require('./config/default');
 const mongoose = require('mongoose');
-const app = express();
-const router = require('./router');
-const cors = require('cors');
+const cors = require('koa2-cors');
 
-//DB setup
-mongoose.connect('mongodb://localhost:auth/auth');
+const errorHandling = require('./src/middlewares/handleErrors');
+//load the routes defined in separate file in src folder
+const routes = require('./src/routes');
 
-//App setup
-app.use(morgan('combined'));
+const passport = require('./src/auth');
+
+const app = new Koa();
+
+//logger
+app.use(logger());
+
+//use cors
 app.use(cors());
-app.use(bodyParser.json({type: '*/*'}));
-router(app);
 
-//Server setup
-const port = process.env.PORT || 3090;
-const server = http.createServer(app);
-server.listen(port);
-console.log('Server is listening to port', port);
+//custom error handling
+app.use(errorHandling());
+
+//body parser
+app.use(bodyParser());
+
+//routes, from separate file
+app.use(routes.routes());
+
+//initilize passport
+app.use(passport.initialize());
+
+//start the app with mongoose
+mongoose.Promise = global.Promise;
+mongoose
+    .connect(config.db.url)
+    .then(() => {
+        app.listen(config.port, () => {
+            console.info(`Application started on port ${config.port}`);
+        });
+    })
+    .catch((err) => {
+        console.error('Error:', err);
+    });
+
+
+
